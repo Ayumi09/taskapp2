@@ -97,7 +97,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="WZx-P0-VRA">
-                                <rect key="frame" x="0.0" y="334" width="414" height="120"/>
+                                <rect key="frame" x="0.0" y="333.5" width="414" height="120"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="120" id="FZL-2d-iZz"/>
                                 </constraints>
@@ -137,7 +137,7 @@
                     <navigationItem key="navigationItem" id="SaP-dw-CFn"/>
                     <connections>
                         <outlet property="contentsTextView" destination="Ad3-cV-Cf5" id="kbC-co-rxq"/>
-                        <outlet property="dataPicker" destination="WZx-P0-VRA" id="9GT-oz-mXL"/>
+                        <outlet property="datePicker" destination="WZx-P0-VRA" id="Kkt-lb-pH4"/>
                         <outlet property="titleTextField" destination="374-7p-VmD" id="5y0-iE-MyS"/>
                     </connections>
                 </viewController>
