@@ -10,9 +10,9 @@ class InputViewController: UIViewController {
     
     @IBOutlet weak var datePicker: UIDatePicker!
     
-    
-    let realm = try! Realm()
+    //ここで宣言してるはず？
     var task: Task!
+    let realm = try! Realm()
 
     override func viewDidLoad() {
         super.viewDidLoad()
