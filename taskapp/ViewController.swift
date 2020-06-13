@@ -1,5 +1,6 @@
 import UIKit
 import RealmSwift
+import UserNotifications
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
@@ -55,33 +56,30 @@ func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPa
 }
 
 // Delete ボタンが押された時に呼ばれるメソッド
-func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-    // --- ここから ---
-    if editingStyle == .delete {
-        // データベースから削除する
-        try! realm.write {
-            self.realm.delete(self.taskArray[indexPath.row])
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        }
-    }
-}
-    
-    // segue で画面遷移する時に呼ばれる
-       override func prepare(for segue: UIStoryboardSegue, sender: Any?){
-           let inputViewController:InputViewController = segue.destination as! InputViewController
+   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+       // --- ここから ---
+       if editingStyle == .delete {
+           // 削除するタスクを取得する
+           let task = self.taskArray[indexPath.row]
 
-           if segue.identifier == "cellSegue" {
-               let indexPath = self.tableView.indexPathForSelectedRow
-               inputViewController.task = taskArray[indexPath!.row]
-           } else {
-               let task = Task()
+           // ローカル通知をキャンセルする
+           let center = UNUserNotificationCenter.current()
+           center.removePendingNotificationRequests(withIdentifiers: [String(task.id)])
 
-               let allTasks = realm.objects(Task.self)
-               if allTasks.count != 0 {
-                   task.id = allTasks.max(ofProperty: "id")! + 1
-               }
-
-               inputViewController.task = task
+           // データベースから削除する
+           try! realm.write {
+               self.realm.delete(task)
+               tableView.deleteRows(at: [indexPath], with: .fade)
            }
-       }
+
+           // 未通知のローカル通知一覧をログ出力
+           center.getPendingNotificationRequests { (requests: [UNNotificationRequest]) in
+               for request in requests {
+                   print("/---------------")
+                   print(request)
+                   print("---------------/")
+               }
+           }
+       } // --- ここまで変更 ---
+}
 }
