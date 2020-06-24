@@ -20,7 +20,24 @@ override func viewDidLoad() {
     tableView.delegate = self
     tableView.dataSource = self
 }
+    // segue で画面遷移する時に呼ばれる
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?){
+        let inputViewController:InputViewController = segue.destination as! InputViewController
 
+        if segue.identifier == "cellSegue" {
+            let indexPath = self.tableView.indexPathForSelectedRow
+            inputViewController.task = taskArray[indexPath!.row]
+        } else {
+            let task = Task()
+
+            let allTasks = realm.objects(Task.self)
+            if allTasks.count != 0 {
+                task.id = allTasks.max(ofProperty: "id")! + 1
+            }
+
+            inputViewController.task = task
+        }
+    }
 // データの数（＝セルの数）を返すメソッド
 func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return taskArray.count  // ←修正する
@@ -81,5 +98,7 @@ func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPa
                }
            }
        } // --- ここまで変更 ---
+ 
+    
 }
 }

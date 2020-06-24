@@ -2,10 +2,16 @@ import UIKit
 import RealmSwift
 import UserNotifications
 
-class InputViewController: UIViewController {
+class InputViewController: UIViewController,UIPickerViewDelegate, UIPickerViewDataSource{
+  
+    func numberOfComponents(in pickerView: UIPickerView) -> Int
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int
+    
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var contentsTextView: UITextView!
     @IBOutlet weak var datePicker: UIDatePicker!
+    @IBOutlet weak var pickerView: UIPickerView!
+    
 
     let realm = try! Realm()
     var task: Task!
@@ -13,6 +19,13 @@ class InputViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+               //PickerViewを使用するためにDelegateを設定する
+               pickerView.delegate = self
+               //PickerViewを使用するためにDataSourceを設定する
+               pickerView.dataSource = self
+               //PickerViewをViewに追加する
+               self.view.addSubview(pickerView)
+        
         // 背景をタップしたらdismissKeyboardメソッドを呼ぶように設定する
         let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(dismissKeyboard))
         self.view.addGestureRecognizer(tapGesture)

@@ -113,6 +113,10 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Emq-Y5-twF">
+                                <rect key="frame" x="0.0" y="480" width="414" height="216"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            </pickerView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -138,6 +142,7 @@
                     <connections>
                         <outlet property="contentsTextView" destination="Ad3-cV-Cf5" id="kbC-co-rxq"/>
                         <outlet property="datePicker" destination="WZx-P0-VRA" id="Kkt-lb-pH4"/>
+                        <outlet property="pickerView" destination="Emq-Y5-twF" id="acT-8p-sVv"/>
                         <outlet property="titleTextField" destination="374-7p-VmD" id="5y0-iE-MyS"/>
                     </connections>
                 </viewController>
