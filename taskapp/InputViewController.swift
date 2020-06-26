@@ -2,10 +2,30 @@ import UIKit
 import RealmSwift
 import UserNotifications
 
+
+
 class InputViewController: UIViewController,UIPickerViewDelegate, UIPickerViewDataSource{
-  
-    func numberOfComponents(in pickerView: UIPickerView) -> Int
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int
+    
+    //pickerViewのプロトコル
+    // UIPickerViewの列の数
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    // UIPickerViewの行数、要素の全数
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return dataList.count
+    }
+    // UIPickerViewに表示する配列
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return dataList[row]
+    }
+    // UIPickerViewのRowが選択された時の挙動
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        // 処理
+        print(" \(dataList[row]) が選択された。")
+    }
+    
+    var dataList = ["日本", "アメリカ", "ドイツ"]
     
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var contentsTextView: UITextView!
@@ -25,6 +45,7 @@ class InputViewController: UIViewController,UIPickerViewDelegate, UIPickerViewDa
                pickerView.dataSource = self
                //PickerViewをViewに追加する
                self.view.addSubview(pickerView)
+        
         
         // 背景をタップしたらdismissKeyboardメソッドを呼ぶように設定する
         let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(dismissKeyboard))
