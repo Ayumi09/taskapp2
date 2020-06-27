@@ -105,7 +105,18 @@ func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPa
                }
            }
        } // --- ここまで変更 ---
- 
+ // 検索ボタンがタップされた時
+     func searchBarSearchButtonClicked(searchBar:UISearchBar) {
+          // 編集時、キャンセルボタンを有効
+        searchBar.showsCancelButton = true
+     }
+      // キャンセルボタンがタップされた時
+     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+ // キャンセルボタンがタップされた時、キャンセルボタンを無効
+ // キーボードを隠す
+         searchBar.showsCancelButton = false
+         searchBar.resignFirstResponder()
+     }
     
 }
 }
