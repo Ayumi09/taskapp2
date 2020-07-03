@@ -19,10 +19,13 @@ class InputViewController: UIViewController,UIPickerViewDelegate, UIPickerViewDa
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return dataList[row]
     }
+    
+    
     // UIPickerViewのRowが選択された時の挙動
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         // 処理
         print(" \(dataList[row]) が選択された。")
+        selectedCategory = dataList[row]
     }
     
     var dataList = ["日本", "アメリカ", "ドイツ"]
@@ -32,38 +35,44 @@ class InputViewController: UIViewController,UIPickerViewDelegate, UIPickerViewDa
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var pickerView: UIPickerView!
     
-
+    
     let realm = try! Realm()
     var task: Task!
-
+    var selectedCategory: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-               //PickerViewを使用するためにDelegateを設定する
-               pickerView.delegate = self
-               //PickerViewを使用するためにDataSourceを設定する
-               pickerView.dataSource = self
-               //PickerViewをViewに追加する
-               self.view.addSubview(pickerView)
+        
+        //PickerViewを使用するためにDelegateを設定する
+        pickerView.delegate = self
+        //PickerViewを使用するためにDataSourceを設定する
+        pickerView.dataSource = self
+        //PickerViewをViewに追加する
+        self.view.addSubview(pickerView)
         
         
         // 背景をタップしたらdismissKeyboardメソッドを呼ぶように設定する
         let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(dismissKeyboard))
         self.view.addGestureRecognizer(tapGesture)
-
+        
         titleTextField.text = task.title
         contentsTextView.text = task.contents
         datePicker.date = task.date
     }
-override func viewWillDisappear(_ animated: Bool) {
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
         try! realm.write {
             self.task.title = self.titleTextField.text!
             self.task.contents = self.contentsTextView.text
             self.task.date = self.datePicker.date
+            
+           // self.task.category = self.selectedCategory
+            
             self.realm.add(self.task, update: .modified)
         }
-
-    setNotification(task: task)   // 追加
+        
+        setNotification(task: task)   // 追加
         super.viewWillDisappear(animated)
     }
     // タスクのローカル通知を登録する --- ここから ---
@@ -81,21 +90,21 @@ override func viewWillDisappear(_ animated: Bool) {
             content.body = task.contents
         }
         content.sound = UNNotificationSound.default
-
+        
         // ローカル通知が発動するtrigger（日付マッチ）を作成
         let calendar = Calendar.current
         let dateComponents = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: task.date)
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
-
+        
         // identifier, content, triggerからローカル通知を作成（identifierが同じだとローカル通知を上書き保存）
         let request = UNNotificationRequest(identifier: String(task.id), content: content, trigger: trigger)
-
+        
         // ローカル通知を登録
         let center = UNUserNotificationCenter.current()
         center.add(request) { (error) in
             print(error ?? "ローカル通知登録 OK")  // error が nil ならローカル通知の登録に成功したと表示します。errorが存在すればerrorを表示します。
         }
-
+        
         // 未通知のローカル通知一覧をログ出力
         center.getPendingNotificationRequests { (requests: [UNNotificationRequest]) in
             for request in requests {
@@ -110,3 +119,4 @@ override func viewWillDisappear(_ animated: Bool) {
         view.endEditing(true)
     }
 }
+
