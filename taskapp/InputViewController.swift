@@ -3,7 +3,6 @@ import RealmSwift
 import UserNotifications
 
 
-
 class InputViewController: UIViewController,UIPickerViewDelegate, UIPickerViewDataSource{
     
     //pickerViewのプロトコル
@@ -31,6 +30,8 @@ class InputViewController: UIViewController,UIPickerViewDelegate, UIPickerViewDa
     var dataList = ["日本", "アメリカ", "ドイツ"]
     
     @IBOutlet weak var titleTextField: UITextField!
+    
+
     @IBOutlet weak var contentsTextView: UITextView!
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var pickerView: UIPickerView!

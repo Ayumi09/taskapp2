@@ -68,8 +68,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="searchText" destination="khg-Ku-jmP" id="iAM-Cs-ljz"/>
-                        <outlet property="tableView" destination="hxX-US-bvs" id="ZOl-Iv-pGI"/>
+                        <outlet property="searchText" destination="khg-Ku-jmP" id="s57-T8-goz"/>
+                        <outlet property="tableView" destination="hxX-US-bvs" id="FYM-Dk-Gdg"/>
                         <segue destination="7tQ-Lz-VTq" kind="show" identifier="cellSegue" id="2Xx-TQ-R6Q"/>
                     </connections>
                 </viewController>
@@ -152,12 +152,12 @@
                     </view>
                     <navigationItem key="navigationItem" id="SaP-dw-CFn"/>
                     <connections>
-                        <outlet property="contentsTextView" destination="Ad3-cV-Cf5" id="kbC-co-rxq"/>
-                        <outlet property="datePicker" destination="WZx-P0-VRA" id="Kkt-lb-pH4"/>
-                        <outlet property="pickerView" destination="Emq-Y5-twF" id="acT-8p-sVv"/>
+                        <outlet property="contentsTextView" destination="Ad3-cV-Cf5" id="LZ9-7p-Wtf"/>
+                        <outlet property="datePicker" destination="WZx-P0-VRA" id="Nec-tV-Qyf"/>
+                        <outlet property="pickerView" destination="Emq-Y5-twF" id="Aq2-MW-Sq4"/>
                         <outlet property="textField" destination="bBJ-TB-tgp" id="omY-vI-rQo"/>
                         <outlet property="textFiled" destination="bBJ-TB-tgp" id="2ku-kt-brP"/>
-                        <outlet property="titleTextField" destination="374-7p-VmD" id="5y0-iE-MyS"/>
+                        <outlet property="titleTextField" destination="374-7p-VmD" id="jjc-3f-Plv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZTG-Te-V6U" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
