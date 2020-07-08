@@ -2,7 +2,6 @@ import UIKit
 import RealmSwift
 import UserNotifications
 
-
 class InputViewController: UIViewController,UIPickerViewDelegate, UIPickerViewDataSource{
     
     //pickerViewのプロトコル
@@ -36,6 +35,10 @@ class InputViewController: UIViewController,UIPickerViewDelegate, UIPickerViewDa
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var pickerView: UIPickerView!
     
+
+    @IBAction func textField1(_ sender: Any) {
+    }
+    
     
     let realm = try! Realm()
     var task: Task!
@@ -43,6 +46,10 @@ class InputViewController: UIViewController,UIPickerViewDelegate, UIPickerViewDa
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //
+        
+        //
         
         //PickerViewを使用するためにDelegateを設定する
         pickerView.delegate = self

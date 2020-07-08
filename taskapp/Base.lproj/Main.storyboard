@@ -155,8 +155,6 @@
                         <outlet property="contentsTextView" destination="Ad3-cV-Cf5" id="LZ9-7p-Wtf"/>
                         <outlet property="datePicker" destination="WZx-P0-VRA" id="Nec-tV-Qyf"/>
                         <outlet property="pickerView" destination="Emq-Y5-twF" id="Aq2-MW-Sq4"/>
-                        <outlet property="textField" destination="bBJ-TB-tgp" id="omY-vI-rQo"/>
-                        <outlet property="textFiled" destination="bBJ-TB-tgp" id="2ku-kt-brP"/>
                         <outlet property="titleTextField" destination="374-7p-VmD" id="jjc-3f-Plv"/>
                     </connections>
                 </viewController>
